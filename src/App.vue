@@ -6,6 +6,7 @@
       </router-link>
       <router-link to='/cart' class="navcart">
         cart
+       <span v-if="cartlist.length">{{ cartlist.length }}</span>
       </router-link>
     </div>
 
@@ -17,7 +18,7 @@
 export default {
   computed: {
     cartlist() {
-      return this.$store.state.cartList;
+      return this.$store.state.cartlist;
     }
   }
 };
@@ -48,5 +49,11 @@ export default {
 .navcart {
   margin-right: 5%;
   color: white;
+}
+.navcart > span {
+  display: inline-block;
+  background-color: red;
+width: 35px;
+  border-radius: 100%;
 }
 </style>

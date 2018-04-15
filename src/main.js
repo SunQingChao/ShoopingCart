@@ -18,7 +18,7 @@ Vue.use(Vuex);
 const RouterConfig = {
   // 使用 HTML5 的 History 路由模式
   mode: 'history',
-  routes:Routers
+  routes: Routers
 };
 
 const router = new VueRouter(RouterConfig);
@@ -83,12 +83,17 @@ const store = new Vuex.Store({
     },
     //修改商品数量
     editcartcount(state, payload) {
-      const product = state.cradlist.find(item => item.id === payload.id);
-      product.count == payload.count;
+      const product = state.cartlist.find(item => item.id === payload.id);
+      product.count += payload.count;
+      // for (let i = 0; i < state.cartlist.length; i++) {
+      //   if (state.cartlist[i].id === payload.id) {
+      //     state.cartlist[i].count += payload.count;
+      //   }
+      // }
     },
-    //删除商品数量
-    deletecartcount(state, id) {
-      const indexid = state.cradlist.find(item => item.id === id);
+    //删除商品
+    deletecart(state, id) {
+      const indexid = state.cartlist.findIndex(item => item.id === id);
       state.cartlist.splice(indexid, 1);
     },
     //清空购物车
@@ -108,7 +113,7 @@ const store = new Vuex.Store({
       //真是环境通过ajax提交购买请求后再清空购物车
       return new Promise(resolve => {
         setTimeout(() => {
-          context.commit('emolycart');
+          context.commit('emplycart');
           resolve();
         }, 500)
       })
